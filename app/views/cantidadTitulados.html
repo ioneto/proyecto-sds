@@ -1,0 +1,138 @@
+<div class="panel-group">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>Cantidad de alumnos Titulados</h4>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-2">
+            <span class="control-label pull-right">Institucion:</span>
+          </div>
+          <div class="col-lg-8">
+            <select class="form-control" ng-model="institucionSelected" ng-change="crearQuery();actualizarCarreras()">
+              <option ng-selected="institucion.nombreInstitucion.value == institucionSelected"
+                      ng-repeat="institucion in instituciones"
+                      value="{{institucion.nombreInstitucion.value}}">
+                {{institucion.nombreInstitucion.value}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-2">
+            <span class="control-label pull-right">Carrera:</span>
+          </div>
+          <div class="col-lg-8">
+            <select class="form-control" ng-model="carreraSelected" ng-change="crearQuery()">
+              <option ng-selected="carrera.nombreCarrera.value == carreraSelected"
+                      ng-repeat="carrera in carreras"
+                      value="{{carrera.nombreCarrera.value}}">
+                {{carrera.nombreCarrera.value}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-2">
+            <span class="control-label pull-right">Region:</span>
+          </div>
+          <div class="col-lg-8">
+            <select class="form-control" ng-model="regionSelected" ng-change="crearQuery()">
+              <option value="TODAS">TODAS</option>
+              <option value="BOLIVIA">BOLIVIA</option>
+              <option value="I REGIÓN">I REGIÓN</option>
+              <option value="II REGIÓN">II REGIÓN</option>
+              <option value="III REGIÓN">III REGIÓN</option>
+              <option value="IV REGIÓN">IV REGIÓN</option>
+              <option value="V REGIÓN">V REGIÓN</option>
+              <option value="REGIÓN METROPOLITANA">REGIÓN METROPOLITANA</option>
+              <option value="VI REGIÓN">VI REGIÓN</option>
+              <option value="VII REGIÓN">VII REGIÓN</option>
+              <option value="VIII REGIÓN">VIII REGIÓN</option>
+              <option value="IX REGIÓN">IX REGIÓN</option>
+              <option value="X REGIÓN">X REGIÓN</option>
+              <option value="XI REGIÓN">XI REGIÓN</option>
+              <option value="XII REGIÓN">XII REGIÓN</option>
+              <option value="XIII REGIÓN">XIII REGIÓN</option>
+              <option value="XIV REGIÓN">XIV REGIÓN</option>
+              <option value="XV REGIÓN">XV REGIÓN</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-2">
+            <span class="control-label pull-right">Horario:</span>
+          </div>
+          <div class="col-lg-8">
+            <select class="form-control" ng-model="horarioSelected" ng-change="crearQuery()">
+              <option value="TODOS">TODOS</option>
+              <option value="DIURNO">DIURNO</option>
+              <option value="VESPERTINO">VESPERTINO</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-2">
+            <span class="control-label pull-right">Año:</span>
+          </div>
+          <div class="col-lg-8">
+            <select class="form-control" ng-model="anioSelected" ng-change="crearQuery()">
+              <option value="TODOS">TODOS</option>
+              <option value="2008.0">2008</option>
+              <option value="2009.0">2009</option>
+              <option value="2010.0">2010</option>
+              <option value="2011.0">2011</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="resultado" class="panel panel-default">
+    <div class="panel-heading">
+      <h5>Resultados de la búsqueda:</h5>
+    </div>
+    <div class="panel-body">
+      <div class="alert alert-info alert-dismissable">Se han encontrado {{cantidadTitulados.length}} registros.<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></div>
+      <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+          <th>Institucion</th>
+          <th>Carrera</th>
+          <th>Region</th>
+          <th>Horario</th>
+          <th>Año</th>
+          <th>Total Titulados</th>
+          <th>Total Titulados Femeninos</th>
+          <th>Total Titulados Masculinos</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="titulados in cantidadTitulados">
+          <td class="col-md-3">{{titulados.nombreInstitucion.value}}</td>
+          <td class="col-md-3">{{titulados.nombreCarrera.value}}</td>
+          <td class="col-md-2">{{titulados.region.value}}</td>
+          <td class="col-md-2">{{titulados.horario.value}}</td>
+          <td class="col-md-1">{{titulados.anio.value.split(".")[0]}}</td>
+          <td class="col-md-1">{{titulados.totalTitulados.value.split(".")[0]}}</td>
+          <td class="col-md-1">{{titulados.totalTituladosFemeninos.value.split(".")[0]}}</td>
+          <td class="col-md-1">{{titulados.totalTituladosMasculinos.value.split(".")[0]}}</td>
+        </tr>
+        <tr ng-if="cantidadTitulados.length == 0">
+          <td colspan="8" align="center" class="col-md-3">NO SE ENCONTRARON RESULTADOS</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
